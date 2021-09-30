@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MusicBands>
+	<MusicBand>
+		<id value="1"/>
+		<name value="Queen"/>
+		<coordinates>
+			<x value="10"/>
+			<y value="123.1"/>
+		</coordinates>
+		<creationDate>
+			<year value="2021"/>
+			<month value="MAY"/>
+			<dayofmonth value="22"/>
+		</creationDate>
+		<numberOfParticipants value="4"/>
+		<description value="Show must go on"/>
+		<establishmentDate value="1970 1"/>
+		<genre value="BLUES"/>
+		<frontMan>
+			<name value="freddie mercury"/>
+			<passportID value="1231231dd"/>
+			<eyeColor value="RED"/>
+			<location>
+				<x value="123"/>
+				<y value="2"/>
+				<z value="2"/>
+			</location>
+		</frontMan>
+	</MusicBand>
+	<MusicBand>
+		<id value="2"/>
+		<name value="Pink Floyd"/>
+		<coordinates>
+			<x value="1"/>
+			<y value="2.0"/>
+		</coordinates>
+		<creationDate>
+			<year value="2021"/>
+			<month value="MAY"/>
+			<dayofmonth value="22"/>
+		</creationDate>
+		<numberOfParticipants value="8"/>
+		<description value="Wish you were here"/>
+		<establishmentDate value="1965 6"/>
+		<genre value="BLUES"/>
+		<frontMan>
+			<name value="Paul"/>
+			<passportID value="407ev"/>
+			<eyeColor value="RED"/>
+			<location>
+				<x value="1"/>
+				<y value="2"/>
+				<z value="3"/>
+			</location>
+		</frontMan>
+	</MusicBand>
+	<MusicBand>
+		<id value="3"/>
+		<name value="Кино"/>
+		<coordinates>
+			<x value="1"/>
+			<y value="2.0"/>
+		</coordinates>
+		<creationDate>
+			<year value="2021"/>
+			<month value="MAY"/>
+			<dayofmonth value="22"/>
+		</creationDate>
+		<numberOfParticipants value="5"/>
+		<description value="Весна"/>
+		<establishmentDate value="1982 3"/>
+		<genre value="BLUES"/>
+		<frontMan>
+			<name value="Витя"/>
+			<passportID value="407ev"/>
+			<eyeColor value="BLACK"/>
+			<location>
+				<x value="1"/>
+				<y value="2"/>
+				<z value="3"/>
+			</location>
+		</frontMan>
+	</MusicBand>
+	<MusicBand>
+		<id value="4"/>
+		<name value="Sirotkin"/>
+		<coordinates>
+			<x value="1"/>
+			<y value="2.0"/>
+		</coordinates>
+		<creationDate>
+			<year value="2021"/>
+			<month value="MAY"/>
+			<dayofmonth value="22"/>
+		</creationDate>
+		<numberOfParticipants value="3"/>
+		<description value="Выше домов"/>
+		<establishmentDate value="2015 7"/>
+		<genre value="BLUES"/>
+		<frontMan value=""/>
+	</MusicBand>
+	<MusicBand>
+		<id value="5"/>
+		<name value="Rammstein"/>
+		<coordinates>
+			<x value="1"/>
+			<y value="2.0"/>
+		</coordinates>
+		<creationDate>
+			<year value="2021"/>
+			<month value="MAY"/>
+			<dayofmonth value="22"/>
+		</creationDate>
+		<numberOfParticipants value="6"/>
+		<description value="Весна"/>
+		<establishmentDate value="1996 12"/>
+		<genre value="BLUES"/>
+		<frontMan value=""/>
+	</MusicBand>
+</MusicBands>
