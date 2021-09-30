@@ -8,7 +8,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
+
 public class Server {
+    /*
+    NIO-TCP-Server
+     */
     private static int port;
 
     public static void main(String[] args) {
@@ -16,27 +20,45 @@ public class Server {
         setPort(args);  //Выбираю порт
 
         try (ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
-            InetSocketAddress inetSocketAddress = new InetSocketAddress(port);  //Привязал фабрику сокетов к порту
-            serverSocketChannel.bind(inetSocketAddress);
-            /*
-            //Если нужен будет тайм аут на сервере:
-            serverSocketChannel.socket().setSoTimeout(5000);    //Через класс ServerSocket задал таймаут
-            SocketChannel socketChannel = serverSocketChannel.socket().accept().getChannel(); //Получиль SocketChannel для взаимодействия с клиентом
-            */
-            SocketChannel socketChannel = serverSocketChannel.accept();     //Получиль SocketChannel для взаимодействия с клиентом
-            socketChannel.configureBlocking(false); //Перевод канала в неблокирующий режим
-            System.out.println(socketChannel.isBlocking());
-            System.out.println("Соединение установлено...");
+            InetSocketAddress inetSocketAddress = new InetSocketAddress(port);
+            serverSocketChannel.bind(inetSocketAddress);   //Привязал фабрику сокетов к порту
 
-            ByteBuffer byteBuffer = ByteBuffer.allocate(4096);
-            socketChannel.read(byteBuffer); //Читаю байты из канала в буфер
-            byteBuffer.flip();  //Подготавливаю буфер к чтению
-            System.out.println("Данные получены...");
+            while (true) {
+                System.out.println("Ожидание подключения...");
+                /*
+                //Если нужен будет тайм аут на сервере:
+                serverSocketChannel.socket().setSoTimeout(5000);    //Через класс ServerSocket задал таймаут
+                SocketChannel socketChannel = serverSocketChannel.socket().accept().getChannel(); //Получиль SocketChannel для взаимодействия с клиентом
+                */
+                ByteBuffer byteBuffer = ByteBuffer.allocate(4096);
+                try (SocketChannel socketChannel = serverSocketChannel.accept()) {
+                    //Получиль SocketChannel для взаимодействия с клиентским приложением
+                    socketChannel.configureBlocking(false); //Перевод канала в неблокирующий режим
+                    System.out.println("Соединение установлено...");
 
-            readbytebuffer(byteBuffer);
+                    byteBuffer.clear();
+                    int c = socketChannel.read(byteBuffer);
+                    System.out.print(c+" ");
+                    while ( c < 1 ){
+                        //Читаю байты из канала в буфер
+                        c = socketChannel.read(byteBuffer);
+                        System.out.print(c+" ");
+                        if (c== -1){
+                            System.exit(-1);
+                        }
+                    }
+                    System.out.println("\n"+byteBuffer.position()+"\t"+byteBuffer.limit());
+                    byteBuffer.flip();  //Подготавливаю буфер к чтению
+                    System.out.println("Данные получены...");
 
-            socketChannel.close();  //Освобождаю сокет
-            System.out.println("Завершение работы сервера...");
+                    readbytebuffer(byteBuffer);
+
+                    socketChannel.write(generateByteBuffer(byteBuffer));
+                    System.out.println("Ответ отправлен...");
+                    System.out.println("Завершение подключения...");
+                }
+            }
+            //System.out.println("Завершение работы сервера...");
         } catch (BindException e) {
             System.out.println("Error: The chosen port is already in use.");
         } catch (SocketTimeoutException e) {
@@ -45,6 +67,7 @@ public class Server {
             System.out.println("Error: Port parameter is outside the specified range of valid port values.");
         } catch (IOException e) {
             System.out.println("Error: IO exception.");
+            e.printStackTrace();
         }
     }
 
@@ -54,6 +77,7 @@ public class Server {
         } else {
             port = 40747;
         }
+        System.out.println("Выбран порт: "+port);
     }
 
     private static void readbytebuffer(ByteBuffer byteBuffer) {
@@ -62,5 +86,18 @@ public class Server {
             System.out.print(byteBuffer.get() + " ");
         }
         System.out.println();
+        byteBuffer.rewind();
+    }
+
+    private static ByteBuffer generateByteBuffer (ByteBuffer inputByteBuffer){
+        ByteBuffer outputByteBuffer = ByteBuffer.allocate(4096);
+        byte b;
+        while (inputByteBuffer.hasRemaining()){
+            b = (byte) (inputByteBuffer.get() + 1);
+            outputByteBuffer.put(b);
+        }
+        inputByteBuffer.rewind();
+        outputByteBuffer.flip();
+        return outputByteBuffer;
     }
 }
