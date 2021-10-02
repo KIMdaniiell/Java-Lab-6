@@ -8,9 +8,9 @@ import java.util.Stack;
 
 public class RequestHandler {
     private final HashMap<String, Command> commandHashMap;
-    private String data_path;
-    private Stack<MusicBand> mystack;
-    private Response response;
+    private final String data_path;
+    private final Stack<MusicBand> mystack;
+    private final Response response;
 
     public RequestHandler(String data_path, Stack<MusicBand> collection) {
         this.data_path = data_path;

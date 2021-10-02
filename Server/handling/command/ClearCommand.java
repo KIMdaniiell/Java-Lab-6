@@ -5,8 +5,8 @@ import server.handling.data.format.MusicBand;
 
 import java.util.Stack;
 
-public class ClearCommand implements Command{
-    private Stack<MusicBand> mystack;
+public class ClearCommand implements Command {
+    private final Stack<MusicBand> mystack;
 
     public ClearCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;

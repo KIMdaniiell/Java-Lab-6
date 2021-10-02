@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 public class SortCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public SortCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;

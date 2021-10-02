@@ -18,7 +18,7 @@ public class Response {
         this.mystack = new Stack<MusicBand>();
     }
 
-    public void addNote (String note) {
+    public void addNote(String note) {
         if (string != null) {
             this.string += note + "\n";
         } else {
@@ -26,11 +26,11 @@ public class Response {
         }
     }
 
-    public void addMusicBand (MusicBand band){
+    public void addMusicBand(MusicBand band) {
         mystack.add(band);
     }
 
-    public void addMusicBand (Stack<MusicBand> stack){
+    public void addMusicBand(Stack<MusicBand> stack) {
         mystack.addAll(stack);
     }
 

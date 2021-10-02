@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class RemoveAnyByDesCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public RemoveAnyByDesCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;
@@ -20,9 +20,9 @@ public class RemoveAnyByDesCommand implements Command {
         Iterator<MusicBand> iterator = mystack.iterator();
         boolean not_deleted = true;
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             MusicBand band = iterator.next();
-            if (not_deleted&&band.getDescription().equals(description)){
+            if (not_deleted && band.getDescription().equals(description)) {
                 iterator.remove();
                 not_deleted = false;
                 String note = "Элемент с данным описанием был удален.";
@@ -30,8 +30,8 @@ public class RemoveAnyByDesCommand implements Command {
                 response.addNote(note);
             }
         }
-        if (not_deleted){
-            String note =("Элемента с таким описанием не существует.");
+        if (not_deleted) {
+            String note = ("Элемента с таким описанием не существует.");
             System.out.println(note);
             response.addNote(note);
         }

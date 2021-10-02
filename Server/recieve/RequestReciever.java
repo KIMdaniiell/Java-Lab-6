@@ -9,8 +9,8 @@ import java.nio.channels.SocketChannel;
 public class RequestReciever {
 
     private static final int bufferSize = 4096;
-    private ByteBuffer byteBuffer;
-    private SocketChannel socketChannel;
+    private final ByteBuffer byteBuffer;
+    private final SocketChannel socketChannel;
 
     public RequestReciever(SocketChannel socketChannel) {
         this.socketChannel = socketChannel;

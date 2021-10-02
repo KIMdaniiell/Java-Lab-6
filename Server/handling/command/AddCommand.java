@@ -6,7 +6,7 @@ import server.handling.data.format.MusicBand;
 import java.util.Stack;
 
 public class AddCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public AddCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;
@@ -16,7 +16,7 @@ public class AddCommand implements Command {
     public void execute(String args, MusicBand musicBand, Response response) {
         MusicBand myband = musicBand;
         mystack.push(myband);
-        System.out.println("Был добавлен новый объект - "+myband.toString());
-        response.addNote("Был добавлен новый объект - "+myband.toString());
+        System.out.println("Был добавлен новый объект - " + myband.toString());
+        response.addNote("Был добавлен новый объект - " + myband.toString());
     }
 }

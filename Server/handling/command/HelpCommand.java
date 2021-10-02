@@ -6,7 +6,7 @@ import server.handling.data.format.MusicBand;
 import java.util.Stack;
 
 public class HelpCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public HelpCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;

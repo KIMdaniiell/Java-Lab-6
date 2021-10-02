@@ -1,12 +1,13 @@
 package server.handling.command;
 
 import server.handling.Response;
-import server.handling.data.format.*;
+import server.handling.data.format.MusicBand;
+import server.handling.data.format.MusicGenre;
 
 import java.util.Stack;
 
 public class FilterCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public FilterCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;

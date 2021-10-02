@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 public class ReorderCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public ReorderCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;

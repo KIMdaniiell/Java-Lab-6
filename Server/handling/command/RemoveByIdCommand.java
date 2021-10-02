@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class RemoveByIdCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public RemoveByIdCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;
@@ -19,11 +19,11 @@ public class RemoveByIdCommand implements Command {
         Iterator<MusicBand> iterator = mystack.iterator();
         boolean not_deleted = true;
 
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             MusicBand band = iterator.next();
             Integer bandid = Integer.valueOf(band.getId().toString());
-            if (bandid.equals(id)){
-                String note = "Удален элемент - "+band.toString();
+            if (bandid.equals(id)) {
+                String note = "Удален элемент - " + band.toString();
                 System.out.println(note);
                 response.addNote(note);
                 iterator.remove();
@@ -33,7 +33,7 @@ public class RemoveByIdCommand implements Command {
                 response.addNote(note);
             }
         }
-        if (not_deleted){
+        if (not_deleted) {
             String note = "Элемента с таким описанием не существует.";
             System.out.println(note);
             response.addNote(note);

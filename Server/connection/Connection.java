@@ -8,17 +8,17 @@ import java.nio.channels.SocketChannel;
 
 public class Connection {
 
-    private static int port = 40747;
+    private static final int port = 40747;
     private ServerSocketChannel serverSocketChannel;
 
-    public Connection () {
-        try{
+    public Connection() {
+        try {
             serverSocketChannel = openServerSocketChannel();
         } catch (BindException e) {
             System.out.println("Error: The chosen port is already in use.");
         } catch (IllegalArgumentException e) {
             System.out.println("Error: Port parameter is outside the specified range of valid port values.");
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error: IO exception. Connection failed.");
             e.printStackTrace();
         }
@@ -32,7 +32,7 @@ public class Connection {
         return serverSocketChannel;
     }
 
-    public SocketChannel getSocketChannel () throws IOException {
+    public SocketChannel getSocketChannel() throws IOException {
         SocketChannel socketChannel;
         do {
             socketChannel = serverSocketChannel.accept();

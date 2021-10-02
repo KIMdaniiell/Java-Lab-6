@@ -1,8 +1,5 @@
 package server.handling.data.format;
 
-import server.handling.data.format.Coordinates;
-import server.handling.data.format.MusicGenre;
-import server.handling.data.format.Person;
 import server.handling.exceptions.InvalidInputValueException;
 
 import java.time.LocalDate;
@@ -76,9 +73,9 @@ public class MusicBand implements Comparable<MusicBand> {
         this.id = idvalue;
     }
 
-    public void setId(Integer id,Stack<MusicBand> mystack) throws InvalidInputValueException {
-        for (MusicBand band : mystack){
-            if (band.getId().equals(id)){
+    public void setId(Integer id, Stack<MusicBand> mystack) throws InvalidInputValueException {
+        for (MusicBand band : mystack) {
+            if (band.getId().equals(id)) {
                 throw new InvalidInputValueException("Ошибка параметра id. \nЭлементов с таким значением больше одного.");
             }
         }

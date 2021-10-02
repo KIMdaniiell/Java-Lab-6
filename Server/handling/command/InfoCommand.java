@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Stack;
 
 public class InfoCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public InfoCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;
@@ -21,11 +21,11 @@ public class InfoCommand implements Command {
         note = "Количество элементов : " + mystack.size();
         System.out.println(note);
         response.addNote(note);
-        note ="Дата инициализации : " + LocalDate.now();
+        note = "Дата инициализации : " + LocalDate.now();
         System.out.println(note);
         response.addNote(note);
         for (MusicBand band : mystack) {
-            System.out.println("\t-"+band.toString());
+            System.out.println("\t-" + band.toString());
         }
     }
 }

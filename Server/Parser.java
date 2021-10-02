@@ -1,12 +1,12 @@
 package server;
 
-import server.handling.data.format.*;
-import server.handling.exceptions.InvalidInputValueException;
-import server.handling.exceptions.InvalidXMLInputStructureException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import server.handling.data.format.*;
+import server.handling.exceptions.InvalidInputValueException;
+import server.handling.exceptions.InvalidXMLInputStructureException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -134,7 +134,7 @@ public class Parser {
                                         case "id":
                                             try {
                                                 Integer idvalue = Integer.valueOf(nodevalue);
-                                                if (idvalue <=0){
+                                                if (idvalue <= 0) {
                                                     throw new InvalidInputValueException("Недопустимое значение Id.");
                                                 }
                                                 band.setId(idvalue, mystack);
@@ -175,13 +175,13 @@ public class Parser {
                                                 band.setEstablishmentDate(null);
                                             } else {
                                                 try {
-                                                    if (nodevalue.split(" ").length == 2){
+                                                    if (nodevalue.split(" ").length == 2) {
                                                         int year = Integer.parseInt(nodevalue.split(" ")[0]);
                                                         int month = Integer.parseInt(nodevalue.split(" ")[1]);
-                                                        if ((month>12)|(month<1)){
+                                                        if ((month > 12) | (month < 1)) {
                                                             throw new InvalidInputValueException("Недопустимое формат ввода Establishment date.");
-                                                        } else if (month==12){
-                                                            year -=1;
+                                                        } else if (month == 12) {
+                                                            year -= 1;
                                                         }
                                                         Date date = new Date(0);
                                                         date.setYear(year);
@@ -192,7 +192,7 @@ public class Parser {
                                                     }
 
 
-                                                } catch (NumberFormatException e){
+                                                } catch (NumberFormatException e) {
                                                     throw new InvalidInputValueException("Недопустимое значение Establishment date.");
                                                 }
                                             }
@@ -273,10 +273,10 @@ public class Parser {
                 } else {
                     int year = band.getEstablishmentDate().getYear();
                     int month = band.getEstablishmentDate().getMonth();
-                    if (month !=0){
-                        pw.printf("\t\t<establishmentDate value=\"%s\"/>\n", year +" "+month +  "");
+                    if (month != 0) {
+                        pw.printf("\t\t<establishmentDate value=\"%s\"/>\n", year + " " + month + "");
                     } else {
-                        pw.printf("\t\t<establishmentDate value=\"%s\"/>\n", year +" "+12 +  "");
+                        pw.printf("\t\t<establishmentDate value=\"%s\"/>\n", year + " " + 12 + "");
                     }
 
                 }

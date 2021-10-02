@@ -13,9 +13,9 @@ public class ResponseSender {
 
     private static final int bufferSize = 4096;
     private Response response;
-    private SocketChannel socketChannel;
+    private final SocketChannel socketChannel;
 
-    public ResponseSender (Response response, Connection connection) throws IOException {
+    public ResponseSender(Response response, Connection connection) throws IOException {
         this.response = response;
         this.socketChannel = connection.getSocketChannel();
     }

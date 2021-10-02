@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class RemoveGreaterCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public RemoveGreaterCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;
@@ -19,8 +19,8 @@ public class RemoveGreaterCommand implements Command {
         MusicBand someband = musicBand;
 
         Iterator<MusicBand> iterator = mystack.iterator();
-        while (iterator.hasNext()){
-            if (iterator.next().compareTo(someband) > 0){
+        while (iterator.hasNext()) {
+            if (iterator.next().compareTo(someband) > 0) {
                 iterator.remove();
             }
         }

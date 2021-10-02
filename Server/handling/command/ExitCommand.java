@@ -6,7 +6,7 @@ import server.handling.data.format.MusicBand;
 import java.util.Stack;
 
 public class ExitCommand implements Command {
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
 
     public ExitCommand(Stack<MusicBand> mystack) {
         this.mystack = mystack;
