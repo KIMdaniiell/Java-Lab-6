@@ -1,11 +1,23 @@
 package server.recieve;
 
-import server.handling.Command;
+import server.handling.data.format.MusicBand;
 
 import java.io.Serializable;
 
 public class RequestWrapper implements Serializable {
-    private Command command;
+    private String command;
     private String arg;
-    //private MusicBand musicBand;
+    private MusicBand musicBand;
+
+    public String getCommand() {
+        return command;
+    }
+
+    public String getArg() {
+        return arg;
+    }
+
+    public MusicBand getMusicBand() {
+        return musicBand;
+    }
 }

@@ -1,7 +1,6 @@
 package server.recieve;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.ByteBuffer;
@@ -13,7 +12,7 @@ public class RequestReciever {
     private ByteBuffer byteBuffer;
     private SocketChannel socketChannel;
 
-    public RequestReciever(SocketChannel socketChannel){
+    public RequestReciever(SocketChannel socketChannel) {
         this.socketChannel = socketChannel;
         this.byteBuffer = ByteBuffer.allocate(bufferSize);
     }
