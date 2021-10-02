@@ -32,7 +32,7 @@ public class Connection {
         return serverSocketChannel;
     }
 
-    public SocketChannel getSocketChannel (ServerSocketChannel serverSocketChannel) throws IOException {
+    public SocketChannel getSocketChannel () throws IOException {
         SocketChannel socketChannel;
         do {
             socketChannel = serverSocketChannel.accept();
