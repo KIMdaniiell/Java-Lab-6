@@ -1,27 +1,21 @@
-package server.connection;
+package connection;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-public class Connection {
+public class Connection implements Closeable {
 
-    private static final int port = 40747;
+    private final int port;
     private ServerSocketChannel serverSocketChannel;
+    private SocketChannel socketChannel;
 
-    public Connection() {
-        try {
-            serverSocketChannel = openServerSocketChannel();
-        } catch (BindException e) {
-            System.out.println("Error: The chosen port is already in use.");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: Port parameter is outside the specified range of valid port values.");
-        } catch (IOException e) {
-            System.out.println("Error: IO exception. Connection failed.");
-            e.printStackTrace();
-        }
+    public Connection(int port) throws BindException,IllegalArgumentException,IOException{
+        this.port = port;
+        serverSocketChannel = openServerSocketChannel();
     }
 
     private ServerSocketChannel openServerSocketChannel() throws IOException {
@@ -36,10 +30,14 @@ public class Connection {
         SocketChannel socketChannel;
         do {
             socketChannel = serverSocketChannel.accept();
-            if (socketChannel != null) {
-                socketChannel.configureBlocking(false);
-            }
         } while (socketChannel == null);
+        socketChannel.configureBlocking(false);
         return socketChannel;
+    }
+
+    @Override
+    public void close() throws IOException {
+        this.serverSocketChannel.close();
+        this.socketChannel.close();
     }
 }
