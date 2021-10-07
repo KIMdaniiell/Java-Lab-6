@@ -1,4 +1,4 @@
-package server.handling.exceptions;
+package handling.exceptions;
 
 /**
  * Thrown to indicate that invalid arguments are given

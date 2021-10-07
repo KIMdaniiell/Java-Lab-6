@@ -1,4 +1,4 @@
-package server.handling.exceptions;
+package handling.exceptions;
 
 /**
  * Thrown if given field value does not suit Task restrictions

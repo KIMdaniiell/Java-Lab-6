@@ -1,4 +1,4 @@
-package server.handling.exceptions;
+package handling.exceptions;
 
 /**
  * Exception class offers to a major contradiction while parsing
