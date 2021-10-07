@@ -1,24 +1,64 @@
-package server;
-
-import server.connection.Connection;
-import server.handling.RequestHandler;
-import server.handling.data.format.MusicBand;
-import server.recieve.RequestReciever;
+import connection.Connection;
+import format.MusicBand;
+import format.RequestWrapper;
+import format.Response;
+import handling.RequestHandler;
+import parser.Parser;
+import recieve.RequestReciever;
+import response.ClientClosedExeption;
+import response.ResponseSender;
 
 import java.io.IOException;
+import java.net.BindException;
+import java.nio.channels.SocketChannel;
 import java.util.Stack;
 
 public class ServerMain {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
+        final int port = 40748;
         String datapath = "inputdata.xml";
 
         Stack<MusicBand> collection = Parser.serialize(datapath);
 
-
-        Connection connection = new Connection();
-        RequestReciever requestReciever = new RequestReciever(connection.getSocketChannel());
         RequestHandler requestHandler = new RequestHandler(datapath, collection);
-        requestHandler.execute(requestReciever.getRequestWrapper().getCommand(), requestReciever.getRequestWrapper().getArg(), requestReciever.getRequestWrapper().getMusicBand());
+        RequestReciever requestReciever;
+        ResponseSender responseSender = new ResponseSender();
 
+        try (Connection connection = new Connection(port)) {
+
+            while (true) {
+                try (SocketChannel socketChannel = connection.getSocketChannel()) {
+
+                    requestReciever = new RequestReciever(socketChannel);
+
+                    RequestWrapper requestWrapper = requestReciever.getRequestWrapper();
+
+                    Response response = requestHandler
+                            .execute(requestWrapper.getCommand(), requestWrapper.getArg(), requestWrapper.getMusicBand());
+
+                    responseSender.send(response,socketChannel);
+
+                } catch (ClientClosedExeption e) {
+                    System.out.println("Error: Client is not available.");
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    System.out.println("Error: Deserialization failed.");
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    System.out.println("Error: Connection interrupted.");
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (BindException e) {
+            System.out.println("Error: The chosen port is already in use.");
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: Port parameter is outside the specified range of valid port values.");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Error: IO exception. Connection failed.");
+            e.printStackTrace();
+        }
     }
 }
