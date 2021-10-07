@@ -1,4 +1,6 @@
-package server.recieve;
+package recieve;
+
+import format.RequestWrapper;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -18,20 +20,22 @@ public class RequestReciever {
     }
 
     public RequestWrapper getRequestWrapper() throws IOException, ClassNotFoundException {
-        int available = 0;
-        int wasavailable = 0;
 
         byteBuffer.clear();
-        do {
-            wasavailable = available;
-            available = socketChannel.read(byteBuffer);
-        } while (byteBuffer.hasRemaining() && (available > 0 || wasavailable == 0));
+
+        int c = socketChannel.read(byteBuffer);
+        while (c < 1){
+            c = socketChannel.read(byteBuffer);
+            if (c== -1) {
+                System.out.println("\nError: Client socket was closed");
+                break;
+            }
+        }
         byteBuffer.flip();
-
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteBuffer.slice().array());
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteBuffer.array());
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
+        return (RequestWrapper) objectInputStream.readObject();
 
-        RequestWrapper requestWrapper = (RequestWrapper) objectInputStream.readObject();
-        return requestWrapper;
+
     }
 }
