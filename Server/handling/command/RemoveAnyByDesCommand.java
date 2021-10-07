@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Iterator;
 import java.util.Stack;
@@ -14,7 +15,7 @@ public class RemoveAnyByDesCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
 
         String description = args;
         Iterator<MusicBand> iterator = mystack.iterator();
@@ -27,13 +28,14 @@ public class RemoveAnyByDesCommand implements Command {
                 not_deleted = false;
                 String note = "Элемент с данным описанием был удален.";
                 System.out.println(note);
-                response.addNote(note);
+                return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
             }
         }
         if (not_deleted) {
             String note = ("Элемента с таким описанием не существует.");
             System.out.println(note);
-            response.addNote(note);
+            return new Response(CommandAccomplishment.NOTFOUND,mystack);
         }
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

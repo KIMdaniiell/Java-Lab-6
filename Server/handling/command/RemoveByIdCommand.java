@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Iterator;
 import java.util.Stack;
@@ -14,7 +15,7 @@ public class RemoveByIdCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
         Integer id = Integer.valueOf(args);
         Iterator<MusicBand> iterator = mystack.iterator();
         boolean not_deleted = true;
@@ -25,18 +26,18 @@ public class RemoveByIdCommand implements Command {
             if (bandid.equals(id)) {
                 String note = "Удален элемент - " + band.toString();
                 System.out.println(note);
-                response.addNote(note);
                 iterator.remove();
                 not_deleted = false;
                 note = "Элемент с данным описанием был удален.";
                 System.out.println(note);
-                response.addNote(note);
+                return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
             }
         }
         if (not_deleted) {
             String note = "Элемента с таким описанием не существует.";
             System.out.println(note);
-            response.addNote(note);
+            return new Response(CommandAccomplishment.NOTFOUND,mystack);
         }
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

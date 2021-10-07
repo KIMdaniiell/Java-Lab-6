@@ -1,8 +1,9 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
-import server.handling.data.format.MusicGenre;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.MusicGenre;
+import format.Response;
 
 import java.util.Stack;
 
@@ -14,13 +15,16 @@ public class FilterCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
         String offer = args;
-
+        Stack<MusicBand> newStack = new Stack<MusicBand>();
         for (MusicBand band : mystack) {
             if (band.getGenre().compareTo(MusicGenre.valueOf(offer)) < 0) {
                 System.out.println(band.toString());
             }
+            newStack.push(band);
         }
+
+        return new Response(CommandAccomplishment.SUCCESSFUL,newStack);
     }
 }

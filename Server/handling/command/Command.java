@@ -1,8 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.MusicBand;
+import format.Response;
 
 public interface Command {
-    void execute(String args, MusicBand band, Response response);
+    Response execute(String args, MusicBand band);
 }

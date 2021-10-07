@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Stack;
 
@@ -13,8 +14,8 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand band, Response response) {
+    public Response execute(String args, MusicBand band) {
         System.out.println("Завершение работы программы ...");
-        response.addNote("Завершение работы программы ...");
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

@@ -1,8 +1,8 @@
-package server.handling.command;
-
-import server.Parser;
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+package handling.command;
+import format.CommandAccomplishment;
+import parser.*;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Stack;
 
@@ -14,10 +14,10 @@ public class SaveCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
         Parser.deserialize(args, mystack);
         String note = "Сохранение ...";
         System.out.println(note);
-        response.addNote(note);
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

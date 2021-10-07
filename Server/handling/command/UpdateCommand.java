@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Collections;
 import java.util.Stack;
@@ -14,33 +15,38 @@ public class UpdateCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
-        Integer curentid = Integer.valueOf(args);
-        boolean has_this_id = false;
-        for (MusicBand band : mystack) {
-            if (band.getId().equals(curentid)) {
-                has_this_id = true;
-            }
-        }
-        if (has_this_id == false) {
-            String note = "Некорректный ввод параметра ID. Элемента с таким ID не существует.";
-            System.out.println(note);
-            response.addNote(note);
-        } else {
-            MusicBand oldband = new MusicBand();
-            MusicBand newband = musicBand;
-            Integer id = curentid;
-            newband.saveID(id);
+    public Response execute(String args, MusicBand musicBand) {
+        Integer curentid;
+        try {
+            curentid = Integer.valueOf(args);
+            boolean has_this_id = false;
             for (MusicBand band : mystack) {
-                if (band.getId().equals(id)) {
-                    oldband = band;
+                if (band.getId().equals(curentid)) {
+                    has_this_id = true;
                 }
             }
-            Collections.replaceAll(mystack, oldband, newband);
-            String note = "Элемент с данным ID был обновлен.";
-            System.out.println(note);
-            response.addNote(note);
+            if (has_this_id == false) {
+                String note = "Некорректный ввод параметра ID. Элемента с таким ID не существует.";
+                System.out.println(note);
+                return new Response(CommandAccomplishment.NOTFOUND,mystack);
+            } else {
+                MusicBand oldband = new MusicBand();
+                MusicBand newband = musicBand;
+                Integer id = curentid;
+                newband.saveID(id);
+                for (MusicBand band : mystack) {
+                    if (band.getId().equals(id)) {
+                        oldband = band;
+                    }
+                }
+                Collections.replaceAll(mystack, oldband, newband);
+                String note = "Элемент с данным ID был обновлен.";
+                System.out.println(note);
+                return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+            }
+        } catch (NumberFormatException e){
+            new Response(CommandAccomplishment.NOTFOUND,mystack);
         }
-
+        return new Response(CommandAccomplishment.NOTFOUND,mystack);
     }
 }

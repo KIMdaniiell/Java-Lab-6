@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Stack;
 
@@ -13,9 +14,10 @@ public class PrintDescriptionCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
         for (MusicBand band : mystack) {
             System.out.println(band.getDescription());
         }
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

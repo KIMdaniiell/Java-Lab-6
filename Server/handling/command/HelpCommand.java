@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Stack;
 
@@ -13,7 +14,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand band, Response response) {
+    public Response execute(String args, MusicBand band) {
         String note = "help : вывести справку по доступным командам\n" +
                 "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)\n" +
                 "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n" +
@@ -32,6 +33,6 @@ public class HelpCommand implements Command {
                 "print_field_descending_description : вывести значения поля description всех элементов в порядке убывания";
 
         System.out.println(note);
-        response.addNote(note);
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

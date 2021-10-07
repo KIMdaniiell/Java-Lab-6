@@ -1,7 +1,6 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.*;
 
 import java.util.Stack;
 
@@ -13,10 +12,11 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
         MusicBand myband = musicBand;
+        myband.setId(mystack);
         mystack.push(myband);
         System.out.println("Был добавлен новый объект - " + myband.toString());
-        response.addNote("Был добавлен новый объект - " + myband.toString());
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

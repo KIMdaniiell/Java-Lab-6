@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Iterator;
 import java.util.Stack;
@@ -14,7 +15,7 @@ public class RemoveGreaterCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
         Stack<MusicBand> stackofgreater = new Stack<>();
         MusicBand someband = musicBand;
 
@@ -24,5 +25,6 @@ public class RemoveGreaterCommand implements Command {
                 iterator.remove();
             }
         }
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }

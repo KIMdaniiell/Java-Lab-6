@@ -1,7 +1,8 @@
-package server.handling.command;
+package handling.command;
 
-import server.handling.Response;
-import server.handling.data.format.MusicBand;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Stack;
 
@@ -13,7 +14,7 @@ public class ShowCommand implements Command {
     }
 
     @Override
-    public void execute(String args, MusicBand musicBand, Response response) {
+    public Response execute(String args, MusicBand musicBand) {
         for (MusicBand band : mystack) {
             String info = "";
             info += band.getId().toString() + " " + band.getName() + "\n";
@@ -39,7 +40,8 @@ public class ShowCommand implements Command {
             }
 
             System.out.println(info);
-            response.addNote(info);
+
         }
+        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
     }
 }
