@@ -1,6 +1,6 @@
 package format;
 
-import format.exceptions.InvalidInputValueException;
+import console.exceptions.InvalidInputValueException;
 
 import java.io.Serializable;
 
