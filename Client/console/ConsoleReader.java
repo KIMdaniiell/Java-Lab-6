@@ -87,8 +87,8 @@ public class ConsoleReader {
                 System.out.println("Error: Unknown command.");
             }
             String commandLine = scanner.nextLine();
-            commandWord = commandLine.toLowerCase().strip().split(" ")[0];
-            commandArgument = commandLine.toLowerCase().strip().substring(commandWord.length()).strip();
+            commandWord = commandLine.toLowerCase().split(" ")[0];
+            commandArgument = commandLine.toLowerCase().substring(commandWord.length()).trim();
         }
         requestWrapper.setCommand(commandWord);
         requestWrapper.setArg(commandArgument);
