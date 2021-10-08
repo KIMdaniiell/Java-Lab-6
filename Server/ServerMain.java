@@ -14,6 +14,11 @@ import java.nio.channels.SocketChannel;
 import java.util.Stack;
 
 public class ServerMain {
+    /*
+     * This server is based on TCP protocol.
+     * It receives RequestWrapper instances and
+     * sends Response as a result.
+     */
     public static void main(String[] args) {
         final int port = 40748;
         String datapath = "inputdata.xml";
@@ -25,25 +30,22 @@ public class ServerMain {
         ResponseSender responseSender = new ResponseSender();
 
         try (Connection connection = new Connection(port)) {
-
             while (true) {
                 try (SocketChannel socketChannel = connection.getSocketChannel()) {
 
                     requestReciever = new RequestReciever(socketChannel);
 
                     RequestWrapper requestWrapper = requestReciever.getRequestWrapper();
-
                     Response response = requestHandler
                             .execute(requestWrapper.getCommand(), requestWrapper.getArg(), requestWrapper.getMusicBand());
-
-                    responseSender.send(response,socketChannel);
+                    responseSender.send(response, socketChannel);
 
                 } catch (ClientClosedExeption e) {
                     System.out.println("Error: Client is not available.");
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     System.out.println("Error: Deserialization failed.");
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 } catch (IOException e) {
                     System.out.println("Error: Connection interrupted.");
                     e.printStackTrace();
@@ -52,10 +54,10 @@ public class ServerMain {
 
         } catch (BindException e) {
             System.out.println("Error: The chosen port is already in use.");
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: Port parameter is outside the specified range of valid port values.");
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Error: IO exception. Connection failed.");
             e.printStackTrace();
