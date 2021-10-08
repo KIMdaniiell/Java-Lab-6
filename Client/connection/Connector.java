@@ -59,6 +59,8 @@ public class Connector implements AutoCloseable{
     }
 
     public void close () throws IOException {
-        socket.close();
+        if (socket != null){
+            socket.close();
+        }
     }
 }
