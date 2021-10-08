@@ -1,10 +1,14 @@
 package format;
 
-import format.MusicBand;
-
 import java.io.Serializable;
 
 public class RequestWrapper implements Serializable {
+    /*
+     * A Class-Wrapper over incoming requests.
+     * Contains string representation of command name,
+     * arguments and an instance of MusicBand class.
+     */
+
     private String command;
     private String arg;
     private MusicBand musicBand;

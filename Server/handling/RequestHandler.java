@@ -9,9 +9,19 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class RequestHandler {
+    /*
+     * This class is a command receiver.
+     * It contains a HashSet of available commands.
+     * Some of commands are handling processed exclusively on the client's side,
+     * so not all of them are presented in the set.
+     * The execute method returns a response wrapper class.
+     *
+     */
+
+
     private final HashMap<String, Command> commandHashMap;
     private final String data_path;
-    private Stack<MusicBand> mystack;
+    private final Stack<MusicBand> mystack;
     private Response response;
 
     public RequestHandler(String data_path, Stack<MusicBand> collection) {
@@ -26,7 +36,7 @@ public class RequestHandler {
             response = commandHashMap.get(name).execute(args, band);
         } else {
             System.out.println("no such command");
-            return new Response(CommandAccomplishment.NOSUCHCOMMAND,null);
+            return new Response(CommandAccomplishment.NOSUCHCOMMAND, null);
         }
         return response;
     }
@@ -46,10 +56,10 @@ public class RequestHandler {
         commandHashMap.put("remove_any_by_description", new RemoveAnyByDesCommand(mystack));
         commandHashMap.put("remove_by_id", new RemoveByIdCommand(mystack));
 
-        //commandHashMap.put("exit", new ExitCommand(mystack));
-        //commandHashMap.put("help", new HelpCommand(mystack));
+        //commandHashMap.put("exit", new ExitCommand(mystack)); реазилуется на стороне клиента
+        //commandHashMap.put("help", new HelpCommand(mystack)); реазилуется на стороне клиента
         //commandHashMap.put("save", new SaveCommand(mystack));
-        //commandHashMap.put("execute_script", new ScriptCommand(mystack));
+        //commandHashMap.put("execute_script", new ScriptCommand(mystack)); реазилуется на стороне клиента
 
     }
 }

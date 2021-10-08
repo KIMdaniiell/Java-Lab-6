@@ -18,6 +18,6 @@ public class PrintDescriptionCommand implements Command {
         for (MusicBand band : mystack) {
             System.out.println(band.getDescription());
         }
-        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

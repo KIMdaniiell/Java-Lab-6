@@ -25,6 +25,6 @@ public class RemoveGreaterCommand implements Command {
                 iterator.remove();
             }
         }
-        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

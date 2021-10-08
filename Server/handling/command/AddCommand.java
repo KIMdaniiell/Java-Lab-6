@@ -1,6 +1,8 @@
 package handling.command;
 
-import format.*;
+import format.CommandAccomplishment;
+import format.MusicBand;
+import format.Response;
 
 import java.util.Stack;
 
@@ -17,6 +19,6 @@ public class AddCommand implements Command {
         myband.setId(mystack);
         mystack.push(myband);
         System.out.println("Был добавлен новый объект - " + myband.toString());
-        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

@@ -30,14 +30,14 @@ public class RemoveByIdCommand implements Command {
                 not_deleted = false;
                 note = "Элемент с данным описанием был удален.";
                 System.out.println(note);
-                return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+                return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
             }
         }
         if (not_deleted) {
             String note = "Элемента с таким описанием не существует.";
             System.out.println(note);
-            return new Response(CommandAccomplishment.NOTFOUND,mystack);
+            return new Response(CommandAccomplishment.NOTFOUND, mystack);
         }
-        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

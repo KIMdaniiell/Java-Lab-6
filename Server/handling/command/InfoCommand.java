@@ -25,6 +25,6 @@ public class InfoCommand implements Command {
         for (MusicBand band : mystack) {
             System.out.println("\t-" + band.toString());
         }
-        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

@@ -1,7 +1,8 @@
 package parser;
-import format.exceptions.*;
 
 import format.*;
+import format.exceptions.InvalidInputValueException;
+import format.exceptions.InvalidXMLInputStructureException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

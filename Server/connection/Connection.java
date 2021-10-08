@@ -1,19 +1,20 @@
 package connection;
 
-import java.io.Closeable;
 import java.io.IOException;
-import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-public class Connection implements Closeable {
+public class Connection implements AutoCloseable {
+    /*
+     * This class accepts connection requests from client and provides connected SocketChannels.
+     */
 
     private final int port;
-    private ServerSocketChannel serverSocketChannel;
+    private final ServerSocketChannel serverSocketChannel;
     private SocketChannel socketChannel;
 
-    public Connection(int port) throws BindException,IllegalArgumentException,IOException{
+    public Connection(int port) throws IllegalArgumentException, IOException {
         this.port = port;
         serverSocketChannel = openServerSocketChannel();
     }

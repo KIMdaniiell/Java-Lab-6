@@ -42,6 +42,6 @@ public class ShowCommand implements Command {
             System.out.println(info);
 
         }
-        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

@@ -17,6 +17,6 @@ public class ClearCommand implements Command {
     public Response execute(String args, MusicBand band) {
         mystack.clear();
         System.out.println("Коллекция очищена.");
-        return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

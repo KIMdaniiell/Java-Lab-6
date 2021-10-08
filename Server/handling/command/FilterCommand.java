@@ -25,6 +25,6 @@ public class FilterCommand implements Command {
             newStack.push(band);
         }
 
-        return new Response(CommandAccomplishment.SUCCESSFUL,newStack);
+        return new Response(CommandAccomplishment.SUCCESSFUL, newStack);
     }
 }

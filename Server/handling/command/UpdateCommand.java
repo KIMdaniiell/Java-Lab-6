@@ -28,7 +28,7 @@ public class UpdateCommand implements Command {
             if (has_this_id == false) {
                 String note = "Некорректный ввод параметра ID. Элемента с таким ID не существует.";
                 System.out.println(note);
-                return new Response(CommandAccomplishment.NOTFOUND,mystack);
+                return new Response(CommandAccomplishment.NOTFOUND, mystack);
             } else {
                 MusicBand oldband = new MusicBand();
                 MusicBand newband = musicBand;
@@ -42,11 +42,11 @@ public class UpdateCommand implements Command {
                 Collections.replaceAll(mystack, oldband, newband);
                 String note = "Элемент с данным ID был обновлен.";
                 System.out.println(note);
-                return new Response(CommandAccomplishment.SUCCESSFUL,mystack);
+                return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
             }
-        } catch (NumberFormatException e){
-            new Response(CommandAccomplishment.NOTFOUND,mystack);
+        } catch (NumberFormatException e) {
+            new Response(CommandAccomplishment.NOTFOUND, mystack);
         }
-        return new Response(CommandAccomplishment.NOTFOUND,mystack);
+        return new Response(CommandAccomplishment.NOTFOUND, mystack);
     }
 }
