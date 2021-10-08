@@ -15,7 +15,6 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class ClientScriptCommand {
-    private int stackPointer;
 
     public Response execute(RequestWrapper requestWrapper, Connector connector, int stackPointer) throws NoSuchElementException, ClassNotFoundException, IOException {
         System.out.println("Запущен скрипт: [" + requestWrapper.getArg() + "]. Текущая глубина рекурсии - " + (5 - stackPointer) + " .");
@@ -27,7 +26,6 @@ public class ClientScriptCommand {
 
         ConsoleReader consoleReader = new ConsoleReader(connector, scanner);
         AnswerHandler answerHandler = new AnswerHandler();
-        this.stackPointer = stackPointer;
         if (!script_file.exists()) {
             throw new FileNotFoundException();
         }
