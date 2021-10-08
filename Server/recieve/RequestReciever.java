@@ -9,33 +9,36 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 public class RequestReciever {
+    /*
+     * This class is responsible for processing requests from the client.
+     * Main data is encapsulated in RequestWrapper class.
+     */
 
-    private static final int bufferSize = 4096;
-    private final ByteBuffer byteBuffer;
     private final SocketChannel socketChannel;
+
 
     public RequestReciever(SocketChannel socketChannel) {
         this.socketChannel = socketChannel;
-        this.byteBuffer = ByteBuffer.allocate(bufferSize);
     }
 
-    public RequestWrapper getRequestWrapper() throws IOException, ClassNotFoundException {
-
-        byteBuffer.clear();
-
-        int c = socketChannel.read(byteBuffer);
-        while (c < 1){
-            c = socketChannel.read(byteBuffer);
-            if (c== -1) {
-                System.out.println("\nError: Client socket was closed");
-                break;
-            }
+    public RequestWrapper getRequestWrapper() throws ClassNotFoundException, IOException {
+        int bufferSize = getPacketSize();
+        ByteBuffer byteBuffer = ByteBuffer.allocate(bufferSize);
+        while (byteBuffer.hasRemaining()) {
+            socketChannel.read(byteBuffer);
         }
-        byteBuffer.flip();
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteBuffer.array());
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
         return (RequestWrapper) objectInputStream.readObject();
 
+    }
 
+    private int getPacketSize() throws IOException {
+        ByteBuffer lengthBuffer = ByteBuffer.allocate(4);
+        while (lengthBuffer.hasRemaining()) {
+            socketChannel.read(lengthBuffer);
+        }
+        lengthBuffer.flip();
+        return lengthBuffer.getInt();
     }
 }
