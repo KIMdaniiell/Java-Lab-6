@@ -8,8 +8,9 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 
-public class Connector {
+public class Connector implements AutoCloseable{
     /*
      * This class manages sockets. There are
      * two methods, on which data exchange with the server
@@ -55,5 +56,9 @@ public class Connector {
     public Response receiveAnswer() throws ClassNotFoundException, IOException {
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         return (Response) objectInputStream.readObject();
+    }
+
+    public void close () throws IOException {
+        socket.close();
     }
 }

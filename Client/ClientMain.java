@@ -19,12 +19,14 @@ public class ClientMain {
      */
 
     public static void main(String[] args) {
+
         final int serverPort = 40748;
         final int maxScriptRecursionDepth = 5;
 
         Connector connector = new Connector(serverPort);
         ConsoleReader consoleReader = new ConsoleReader(connector, new Scanner(System.in));
         AnswerHandler answerHandler = new AnswerHandler();
+
 
         boolean isStopped = false;
 
@@ -39,6 +41,7 @@ public class ClientMain {
                         answerHandler.readAnswer(response, requestWrapper);
                     }
                 }
+                connector.close();
             } catch (SocketException e) {
                 System.out.println("Error: Server failed to proses the request.");
                 //e.printStackTrace();
