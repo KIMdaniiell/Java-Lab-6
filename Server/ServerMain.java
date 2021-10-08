@@ -29,6 +29,11 @@ public class ServerMain {
         } else{
             Stack<MusicBand> collection = Parser.serialize(datapath);
 
+            Runtime.getRuntime().addShutdownHook(new Thread( () -> {
+                Parser.deserialize(datapath,collection);
+                System.out.println("Ой, сохранение...");
+            }));
+
             RequestHandler requestHandler = new RequestHandler(datapath, collection);
             RequestReciever requestReciever;
             ResponseSender responseSender = new ResponseSender();

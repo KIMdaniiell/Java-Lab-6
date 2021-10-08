@@ -12,7 +12,6 @@ public class Connection implements AutoCloseable {
 
     private final int port;
     private final ServerSocketChannel serverSocketChannel;
-    private SocketChannel socketChannel;
 
     public Connection(int port) throws IllegalArgumentException, IOException {
         this.port = port;
@@ -39,6 +38,5 @@ public class Connection implements AutoCloseable {
     @Override
     public void close() throws IOException {
         this.serverSocketChannel.close();
-        this.socketChannel.close();
     }
 }

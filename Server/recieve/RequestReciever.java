@@ -29,7 +29,13 @@ public class RequestReciever {
         }
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteBuffer.array());
         ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-        return (RequestWrapper) objectInputStream.readObject();
+
+        RequestWrapper requestWrapper = (RequestWrapper) objectInputStream.readObject();
+
+        objectInputStream.close();
+        byteArrayInputStream.close();
+
+        return requestWrapper;
 
     }
 

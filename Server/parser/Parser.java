@@ -243,13 +243,11 @@ public class Parser {
         mystack = somestack;
 
         String xmlstructure = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        try {
-            File file = new File(data_path);
+        File file = new File(data_path);
+        try (PrintWriter pw = new PrintWriter(file)){
             if (!file.exists()) {
                 file.createNewFile();
             }
-            PrintWriter pw = new PrintWriter(file);
-
             pw.println(xmlstructure);
             pw.println("<MusicBands>");
             for (MusicBand band : mystack) {
@@ -299,9 +297,6 @@ public class Parser {
                 pw.println("\t</MusicBand>");
             }
             pw.println("</MusicBands>");
-
-
-            pw.close();
         } catch (IOException e) {
             System.out.println("Ошибка! " + e);
         }

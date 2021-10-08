@@ -53,18 +53,13 @@ public class ResponseSender {
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-        /*
-        if (socketChannel.isConnected()) {
-            objectOutputStream.writeObject(response);
-        } else {
-            throw new ClientClosedExeption("");
-        }
-         */
         objectOutputStream.writeObject(response);
         ByteBuffer outBuffer = ByteBuffer.wrap(byteArrayOutputStream.toByteArray());
         while (outBuffer.hasRemaining()) {
             socketChannel.write(outBuffer);
         }
         outBuffer.clear();
+        objectOutputStream.close();
+        byteArrayOutputStream.close();
     }
 }
