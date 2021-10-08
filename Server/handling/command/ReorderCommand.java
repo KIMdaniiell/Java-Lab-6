@@ -27,7 +27,8 @@ public class ReorderCommand implements Command {
         }).collect(Collectors.toCollection(Stack<MusicBand>::new));
 
         String note = "Коллекция отсортирована в обратном порядке.";
-        System.out.println(note);
+        //System.out.println(note);
+        System.out.println("\t-[reorder]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

@@ -18,7 +18,8 @@ public class AddCommand implements Command {
         MusicBand myband = musicBand;
         myband.setId(mystack);
         mystack.push(myband);
-        System.out.println("Был добавлен новый объект - " + myband.toString());
+        //System.out.println("Был добавлен новый объект - " + myband.toString());
+        System.out.println("\t-[add]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

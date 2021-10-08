@@ -16,7 +16,6 @@ public class RemoveGreaterCommand implements Command {
 
     @Override
     public Response execute(String args, MusicBand musicBand) {
-        Stack<MusicBand> stackofgreater = new Stack<>();
         MusicBand someband = musicBand;
 
         Iterator<MusicBand> iterator = mystack.iterator();
@@ -25,6 +24,7 @@ public class RemoveGreaterCommand implements Command {
                 iterator.remove();
             }
         }
+        System.out.println("\t-[remove_greater]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

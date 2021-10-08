@@ -15,6 +15,7 @@ public class ShowCommand implements Command {
 
     @Override
     public Response execute(String args, MusicBand musicBand) {
+        /*
         for (MusicBand band : mystack) {
             String info = "";
             info += band.getId().toString() + " " + band.getName() + "\n";
@@ -42,6 +43,8 @@ public class ShowCommand implements Command {
             System.out.println(info);
 
         }
+         */
+        System.out.println("\t-[show]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

@@ -27,15 +27,18 @@ public class RemoveAnyByDesCommand implements Command {
                 iterator.remove();
                 not_deleted = false;
                 String note = "Элемент с данным описанием был удален.";
-                System.out.println(note);
+                //System.out.println(note);
+                System.out.println("\t-[remove_any_by_description]\t"+CommandAccomplishment.SUCCESSFUL);
                 return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
             }
         }
         if (not_deleted) {
             String note = ("Элемента с таким описанием не существует.");
-            System.out.println(note);
+            //System.out.println(note);
+            System.out.println("\t-[remove_any_by_description]\t"+CommandAccomplishment.NOTFOUND);
             return new Response(CommandAccomplishment.NOTFOUND, mystack);
         }
+        System.out.println("\t-[remove_any_by_description]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

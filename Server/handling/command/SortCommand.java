@@ -28,7 +28,8 @@ public class SortCommand implements Command {
 
 
         String note = "Коллекция отсортирована.";
-        System.out.println(note);
+        //System.out.println(note);
+        System.out.println("\t-[sort]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }

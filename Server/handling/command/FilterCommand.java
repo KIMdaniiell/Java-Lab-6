@@ -24,7 +24,7 @@ public class FilterCommand implements Command {
             }
             newStack.push(band);
         }
-
+        System.out.println("\t-[filter_less_than_genre]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, newStack);
     }
 }

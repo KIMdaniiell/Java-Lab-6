@@ -16,6 +16,8 @@ public class InfoCommand implements Command {
 
     @Override
     public Response execute(String args, MusicBand musicBand) {
+        //  Парсинг происходит на стороне клиента
+        /*
         String note = "Тип : " + mystack.getClass().getName();
         System.out.println(note);
         note = "Количество элементов : " + mystack.size();
@@ -25,6 +27,8 @@ public class InfoCommand implements Command {
         for (MusicBand band : mystack) {
             System.out.println("\t-" + band.toString());
         }
+         */
+        System.out.println("\t-[info]\t"+CommandAccomplishment.SUCCESSFUL);
         return new Response(CommandAccomplishment.SUCCESSFUL, mystack);
     }
 }
