@@ -21,12 +21,16 @@ public class ServerMain {
      */
     public static void main(String[] args) {
 
-        final int port = 40748;
-        String datapath = System.getenv("DPATH");  // default value is "inputdata.xml"
+        //final int port = 40748;
+        String sport = System.getenv("SPORT");                          // default value is "40748"
+        String datapath = System.getenv("DPATH");                       // default value is "inputdata.xml"
 
         if (datapath == null) {
             System.out.println("Error: Environmental variable [DPATH] not found.");
-        } else{
+        } else if (sport == null){
+            System.out.println("Error: Environmental variable [SPORT] not found.");
+        } else {
+            int port = Integer.parseInt(sport);
             Stack<MusicBand> collection = Parser.serialize(datapath);
 
             Runtime.getRuntime().addShutdownHook(new Thread( () -> {
