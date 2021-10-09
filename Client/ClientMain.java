@@ -20,43 +20,49 @@ public class ClientMain {
 
     public static void main(String[] args) {
 
-        final int serverPort = 40748;
-        final int maxScriptRecursionDepth = 5;
+        String sport = System.getenv("SPORT");                          // default value is "40748"
+        if (sport == null){
+            System.out.println("Error: Environmental variable [SPORT] not found.");
+        } else {
+            int serverPort = Integer.parseInt(sport);
 
-        Connector connector = new Connector(serverPort);
-        ConsoleReader consoleReader = new ConsoleReader(connector, new Scanner(System.in));
-        AnswerHandler answerHandler = new AnswerHandler();
+            final int maxScriptRecursionDepth = 5;
+
+            Connector connector = new Connector(serverPort);
+            ConsoleReader consoleReader = new ConsoleReader(connector, new Scanner(System.in));
+            AnswerHandler answerHandler = new AnswerHandler();
 
 
-        boolean isStopped = false;
+            boolean isStopped = false;
 
-        while (!isStopped) {
-            try {
-                RequestWrapper requestWrapper = consoleReader.read(answerHandler, maxScriptRecursionDepth);
-                if (requestWrapper != null) {
-                    if (requestWrapper.getCommand().equals("exit")) {
-                        isStopped = true;
-                    } else {
-                        Response response = connector.sendRequestWrapper(requestWrapper);
-                        answerHandler.readAnswer(response, requestWrapper);
+            while (!isStopped) {
+                try {
+                    RequestWrapper requestWrapper = consoleReader.read(answerHandler, maxScriptRecursionDepth);
+                    if (requestWrapper != null) {
+                        if (requestWrapper.getCommand().equals("exit")) {
+                            isStopped = true;
+                        } else {
+                            Response response = connector.sendRequestWrapper(requestWrapper);
+                            answerHandler.readAnswer(response, requestWrapper);
+                        }
                     }
+                    connector.close();
+                } catch (SocketException e) {
+                    System.out.println("Error: Server failed to proses the request.");
+                    //e.printStackTrace();
+                } catch (NoSuchElementException e) {
+                    System.out.println("Error: Request building failed. Invalid script format.");
+                    //e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    System.out.println("Error: Unable to find script file.");
+                    //e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    System.out.println("Error: Deserialization failed. Try again.");
+                    //e.printStackTrace();
+                } catch (IOException e) {
+                    System.out.println("Error: IO exception. Connection failed. Try again.");
+                    e.printStackTrace();
                 }
-                connector.close();
-            } catch (SocketException e) {
-                System.out.println("Error: Server failed to proses the request.");
-                //e.printStackTrace();
-            } catch (NoSuchElementException e) {
-                System.out.println("Error: Request building failed. Invalid script format.");
-                //e.printStackTrace();
-            } catch (FileNotFoundException e) {
-                System.out.println("Error: Unable to find script file.");
-                //e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                System.out.println("Error: Deserialization failed. Try again.");
-                //e.printStackTrace();
-            } catch (IOException e) {
-                System.out.println("Error: IO exception. Connection failed. Try again.");
-                e.printStackTrace();
             }
         }
     }
