@@ -53,8 +53,9 @@ public class ClientMain {
                         System.out.println("Error: Server failed to proses the request.");
                         //e.printStackTrace();
                     } catch (NoSuchElementException e) {
-                        System.out.println("Error: Request building failed. Invalid script format.");
+                        System.out.println("Error: The input stream was lost. EOF.");
                         //e.printStackTrace();
+                        break;
                     } catch (FileNotFoundException e) {
                         System.out.println("Error: Unable to find script file.");
                         //e.printStackTrace();
