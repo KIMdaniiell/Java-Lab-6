@@ -81,7 +81,6 @@ public class ConsoleReader {
             }
             case "filter_less_than_genre":{
                 if (!MusicGenre.contains(requestWrapper.getArg())){
-                    System.out.println("["+requestWrapper.getArg()+"]");
                     System.out.println("Error: Invalid command argument format.");
                     requestWrapper = null;
                     break;
