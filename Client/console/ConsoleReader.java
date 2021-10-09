@@ -3,16 +3,12 @@ package console;
 import answer.AnswerHandler;
 import answer.command.ExitCommand;
 import connection.Connector;
-import format.CommandAccomplishment;
-import format.MusicBand;
-import format.RequestWrapper;
-import format.Response;
+import format.*;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.Stack;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class ConsoleReader {
     /*
@@ -73,6 +69,24 @@ public class ConsoleReader {
                 requestWrapper = null;
                 break;
             }
+            case "remove_by_id":{
+                try {
+                    Integer.parseInt(requestWrapper.getArg());
+                    break;
+                } catch (NumberFormatException e){
+                    System.out.println("Error: Invalid command argument format.");
+                    requestWrapper = null;
+                    break;
+                }
+            }
+            case "filter_less_than_genre":{
+                if (!MusicGenre.contains(requestWrapper.getArg())){
+                    System.out.println("["+requestWrapper.getArg()+"]");
+                    System.out.println("Error: Invalid command argument format.");
+                    requestWrapper = null;
+                    break;
+                }
+            }
         }
 
         return requestWrapper;
@@ -88,7 +102,7 @@ public class ConsoleReader {
             }
             String commandLine = scanner.nextLine();
             commandWord = commandLine.toLowerCase().split(" ")[0];
-            commandArgument = commandLine.toLowerCase().substring(commandWord.length()).trim();
+            commandArgument = commandLine.substring(commandWord.length()).trim();
         }
         requestWrapper.setCommand(commandWord);
         requestWrapper.setArg(commandArgument);
